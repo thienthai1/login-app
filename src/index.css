@@ -1,0 +1,84 @@
+.auth-box {
+  box-shadow: 1px 0 20px rgba(0,0,0,.08);
+  margin: auto;
+  margin-top: 250px;
+  max-width: 400px;
+  width: 90%;
+  background-color: white;
+  border-radius: 6px;
+  padding-top: 6px;
+  padding-bottom: 20px;
+}
+
+.auth-content {
+  padding: 1px 1px 1px 26px;
+}
+
+.auth-box-header > h3 {
+  margin-left: 6px;
+  margin-bottom: 2px;
+  margin-top: 18px;
+  font-size: 22px;
+}
+
+.auth-checkbox-zone {
+  width: 100%;
+  margin-left: -23px;
+}
+
+.forgot-password-link {
+  margin-top: 8px;
+}
+
+.forgot-password-link > a {
+  text-decoration: none;
+  color: #455a64;
+  font-weight: 600;
+  position: relative;
+  top: 4px;
+  left: 3px;
+}
+
+.auth-checkbox-zone {
+  width: 100%!important;
+  position: relative;
+  left: -24px;
+}
+
+.submit-login {
+  width: 86%!important;
+  margin-top: 15px!important;
+}
+
+.submit-login > button {
+  width: 100%;
+  height: 34px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sign-up-zone {
+  width: 100%!important;
+  text-align: center;
+  position: relative;
+  left: -26px;
+  margin-top: 17px!important;
+  margin-bottom: 27px!important;
+}
+
+.username-field {
+  width: 86%!important;
+}
+
+.username-field > div {
+  width: 100%!important;
+}
+
+.password-field {
+  width: 86%!important;
+}
+
+.password-field > div {
+  width: 100%!important;
+}
+
