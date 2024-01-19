@@ -10,7 +10,7 @@ import auth from '../firebase/config';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Workout() {
+export default function Login(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +23,7 @@ export default function Workout() {
         .then((userCredential) => {
             // Signed in 
             alert(`Username: ${username}\nPassword: ${password}`);
-            const user = userCredential.user;
+            props.onLoginTrigger(userCredential)
             setLoginOpacity('100%')
             // ...
         })
