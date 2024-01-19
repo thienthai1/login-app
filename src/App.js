@@ -10,12 +10,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState('false');
   const [isOpenRegister, setIsOpenRegister] = useState(false)
+  const [isOpenLoginSuccess, setIsOpenLoginSuccess] = useState(false)
 
   const LoginTrigger = (data) => {
       setCurrentUser(data.user.email)
-      console.log('login working')
-      console.log(data.user.email);
       setIsLogin('true')
+      setIsOpenLoginSuccess(true)
+      setTimeout(() => {
+        setIsOpenLoginSuccess(false)
+      },5000)
   }
 
   const LogoutTrigger = () => {
@@ -47,9 +50,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-        Login Successful
-      </Alert> */}
+      { isOpenLoginSuccess &&
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+          Login Successful
+        </Alert>
+      }
         {isLogin == 'false' ? (
 
           isOpenRegister == false ? (

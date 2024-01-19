@@ -9,12 +9,14 @@ import LockIcon from '@mui/icons-material/Lock';
 import auth from '../firebase/config';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 export default function Login(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginOpacity, setLoginOpacity] = useState('100%');
+    const [isOpenLoginFailed, setIsOpenLoginFailed] = useState(false)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,7 +33,10 @@ export default function Login(props) {
             const errorCode = error.code;
             const errorMessage = error.message;
             setLoginOpacity('100%')
-            alert(errorMessage)
+            setIsOpenLoginFailed(true)
+            setTimeout(() => {
+              setIsOpenLoginFailed(false)
+            },5000)
         });
       };
 
@@ -40,7 +45,11 @@ export default function Login(props) {
     }
 
     return (
-<div className='auth-box'>
+        <>
+        { isOpenLoginFailed &&
+          <Alert severity="error">Login Failed</Alert>
+        }
+        <div className='auth-box'>
             {   loginOpacity == '20%' &&
                 <CircularProgress style={{ position: 'absolute', top: '35%', left: '48%' }}/>  
             }
@@ -80,5 +89,6 @@ export default function Login(props) {
           </Box>
         </div>
       </div>
+      </>
     )
 }
