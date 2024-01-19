@@ -35,9 +35,9 @@ export default function Login(props) {
         });
       };
 
-    useEffect(() => {
-        console.log(process.env.REACT_APP_API_KEY)
-    })
+    const handleSignUp = () => {
+      props.onSignupTrigger()
+    }
 
     return (
 <div className='auth-box'>
@@ -75,7 +75,7 @@ export default function Login(props) {
               <Button type="submit" variant="contained">Log In</Button>
             </div>
             <div className='sign-up-zone'>
-              <span className='sign-up-main-text'>Don't have an account? <a href="#">Sign Up</a></span>
+              <span className='sign-up-main-text'>Don't have an account? <a onClick={handleSignUp} href="javascript:void(0)">Sign Up</a></span>
             </div>
           </Box>
         </div>

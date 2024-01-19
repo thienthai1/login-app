@@ -8,6 +8,7 @@
   border-radius: 6px;
   padding-top: 6px;
   padding-bottom: 20px;
+  position: relative;
 }
 
 .auth-content {
@@ -80,5 +81,12 @@
 
 .password-field > div {
   width: 100%!important;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 45px;
+  top: 25px;
+  cursor: pointer;
 }
 
