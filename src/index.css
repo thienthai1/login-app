@@ -90,3 +90,8 @@
   cursor: pointer;
 }
 
+.validation-text > p {
+  color: red;
+  font-size: 12px;
+}
+
