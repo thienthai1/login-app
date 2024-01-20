@@ -15,6 +15,7 @@ export default function Login(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isRememberMe, setIsRememberMe] = useState(false);
     const [loginOpacity, setLoginOpacity] = useState('100%');
     const [isOpenLoginFailed, setIsOpenLoginFailed] = useState(false)
 
@@ -27,6 +28,9 @@ export default function Login(props) {
             alert(`Username: ${username}\nPassword: ${password}`);
             props.onLoginTrigger(userCredential)
             setLoginOpacity('100%')
+            if(isRememberMe){
+              localStorage.setItem('rememberUsername', username);
+            }
             // ...
         })
         .catch((error) => {
@@ -43,6 +47,12 @@ export default function Login(props) {
     const handleSignUp = () => {
       props.onSignupTrigger()
     }
+
+    useEffect(() => {
+      if(localStorage.getItem('rememberUsername') != null){
+        setUsername(localStorage.getItem('rememberUsername'))
+      }
+    }, [])
 
     return (
         <>
@@ -74,7 +84,7 @@ export default function Login(props) {
             </div>
             <div class="flex justify-content-space-around auth-checkbox-zone">
               <div>
-                <FormControlLabel control={<Checkbox />} label="Remember me" />
+                <FormControlLabel onChange={(e) => setIsRememberMe(e.target.value)} value={isRememberMe} control={<Checkbox />} label="Remember me" />
               </div>
               <div className='forgot-password-link'>
               <LockIcon>Lock</LockIcon><a href="#">Forgot pwd?</a>
