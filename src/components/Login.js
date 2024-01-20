@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import LockIcon from '@mui/icons-material/Lock';
 import auth from '../firebase/config';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup , GoogleAuthProvider } from "firebase/auth";
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 
@@ -45,6 +45,31 @@ export default function Login(props) {
             },5000)
         });
       };
+
+    const handleGoogleSignIn = () => {
+      console.log('test')
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        props.onLoginTrigger(result)
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+    }
 
     const handleSignUp = () => {
       props.onSignupTrigger()
@@ -99,6 +124,10 @@ export default function Login(props) {
             </div>
             <div class="submit-login">
               <Button type="submit" variant="contained">Log In</Button>
+            </div>
+            <div class="social-media-login-zone">
+              <img src="./facebook-icon.png" alt="Facebook" />
+              <img onClick={handleGoogleSignIn} src="./google-icon.png" alt="Google" />
             </div>
             <div className='sign-up-zone'>
               <span className='sign-up-main-text'>Don't have an account? <a onClick={handleSignUp} href="javascript:void(0)">Sign Up</a></span>

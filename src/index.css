@@ -95,3 +95,15 @@
   font-size: 12px;
 }
 
+.social-media-login-zone {
+  width: fit-content!important;
+  margin: auto!important;
+  position: relative;
+  right: 25px;
+}
+
+.social-media-login-zone > img {
+  cursor: pointer;
+}
+
+
