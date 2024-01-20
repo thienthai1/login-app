@@ -18,9 +18,11 @@ export default function Login(props) {
     const [isRememberMe, setIsRememberMe] = useState(false);
     const [loginOpacity, setLoginOpacity] = useState('100%');
     const [isOpenLoginFailed, setIsOpenLoginFailed] = useState(false)
+    const [validateCheck, setValidateCheck] = useState(false)
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setValidateCheck(true)
         setLoginOpacity('20%')
         signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
@@ -77,10 +79,10 @@ export default function Login(props) {
             onSubmit={handleSubmit}
           >
             <div class="username-field">
-              <TextField value={username} id="standard-basic" label="Username" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setUsername(e.target.value)} />
+              <TextField  error={username === "" && validateCheck} value={username} id="standard-basic" label="Username" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div class="password-field">
-              <TextField value={password} id="standard-basic" type="password" label="Password" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setPassword(e.target.value)} />
+              <TextField error={password === "" && validateCheck} value={password} id="standard-basic" type="password" label="Password" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div class="flex justify-content-space-around auth-checkbox-zone">
               <div>
@@ -89,6 +91,11 @@ export default function Login(props) {
               <div className='forgot-password-link'>
               <LockIcon>Lock</LockIcon><a href="#">Forgot pwd?</a>
               </div>
+            </div>
+            <div class="validation-text">
+                {   ((username === "") || (password === "")) && validateCheck &&
+                    <p>* Please type in username and password</p>
+                }
             </div>
             <div class="submit-login">
               <Button type="submit" variant="contained">Log In</Button>

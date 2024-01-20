@@ -10,22 +10,13 @@ import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 export default function Register(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [validateCheck, setValidateCheck] = useState(false)
 
     const handleSignup = async (event) => {
-        // event.preventDefault();
-        // await createUserWithEmailAndPassword(auth, username, password)
-        // .then((userCredential) => {
-        //     alert('sucess')
-        //     props.handleCloseSignUp()
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     alert(errorMessage)
-        //     props.handleCloseSignUp()
-        // });
 
-        // await auth.signOut()
+        event.preventDefault();
+
+        setValidateCheck(true)
 
         try {
             // Create user account
@@ -38,6 +29,7 @@ export default function Register(props) {
           } catch (error) {
             console.error('Error signing up:', error.message);
           }
+
     }
 
     return (
@@ -57,10 +49,15 @@ export default function Register(props) {
             onSubmit={handleSignup}
           >
             <div class="username-field">
-              <TextField value={username} id="standard-basic" label="Username" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setUsername(e.target.value)} />
+              <TextField error={username === "" && validateCheck} value={username} id="standard-basic" label="Username" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div class="password-field">
-              <TextField value={password} id="standard-basic" type="password" label="Password" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setPassword(e.target.value)} />
+              <TextField error={password === "" && validateCheck} value={password} id="standard-basic" type="password" label="Password" variant="standard" InputLabelProps={{style: {fontSize: 13}}} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div class="validation-text">
+                {   ((username === "") || (password === "")) && validateCheck &&
+                    <p>* Please type in username and password</p>
+                }
             </div>
             <div class="submit-login">
               <Button type="submit" variant="contained">Register</Button>
